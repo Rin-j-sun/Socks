@@ -82,6 +82,7 @@ Vue.component('product-review', {
 
 
 // Вкладки
+
 Vue.component('product-tabs', {
     template: `
       <div>
@@ -105,6 +106,12 @@ Vue.component('product-tabs', {
       <div v-show="selectedTab === 'Make a Review'">
         <product-review></product-review>
       </div>
+      <div v-show="selectedTab === 'Shipping'">
+        <shipping-tab :premium="premium"></shipping-tab>
+      </div>
+      <div v-show="selectedTab === 'Details'">
+        <details-tab :details="details"></details-tab>
+      </div>
       </div>
     `,
     props: {
@@ -115,11 +122,15 @@ Vue.component('product-tabs', {
         premium: {
             type: Boolean,
             required: true
+        },
+        details: {
+            type: Array,
+            required: true
         }
     },
     data() {
         return {
-            tabs: ['Reviews', 'Make a Review'],
+            tabs: ['Reviews', 'Make a Review', 'Shipping', 'Details'],
             selectedTab: 'Reviews'
         }
     }
@@ -131,6 +142,11 @@ Vue.component('product', {
     props: {
         premium: {
             type: Boolean,
+            required: true
+        },
+
+        cart: {
+            type: Array,
             required: true
         },
 
@@ -192,12 +208,20 @@ Vue.component('product', {
                     variantQuantity: 0
                 }
             ],
+            sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
         }
     },
     methods: {
         addToCart() {
             this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
+
+        вудшеFromCart() {
+            if (this.cart.length > 0) {
+                this.$emit('remove-from-cart', this.cart[this.cart.length - 1]);
+            }
+        },
+
         updateProduct(index) {
             this.selectedVariant = index;
             console.log(index);
@@ -223,6 +247,38 @@ Vue.component('product', {
     }
 })
 
+Vue.component('shipping-tab', {
+    template: `
+    <div>
+      <p>Shipping Details:</p>
+      <p v-if="premium">Free Shipping</p>
+      <p v-else>Shipping Cost: $2.99</p>
+    </div>
+  `,
+    props: {
+        premium: {
+            type: Boolean,
+            required: true
+        }
+    }
+});
+
+Vue.component('details-tab', {
+    template: `
+    <div>
+      <p>Product Details:</p>
+      <ul>
+        <li v-for="detail in details">{{ detail }}</li>
+      </ul>
+    </div>
+  `,
+    props: {
+        details: {
+            type: Array,
+            required: true
+        }
+    }
+});
 
 let app = new Vue({
     el: '#app',
