@@ -25,6 +25,14 @@ Vue.component('product-review', {
             <option>1</option>
         </select>
     </p>
+
+    <p>
+      <label for="recommend">Would you recommend this product?</label><br>
+      <input type="radio" id="recommend-yes" value="yes" v-model="recommend"> <label for="recommend-yes">Yes</label><br>
+      <input type="radio" id="recommend-no" value="no" v-model="recommend"> <label for="recommend-no">No</label>
+    </p>
+    <p>
+    
     <p>
         <input type="submit" value="Submit">
     </p>
@@ -40,23 +48,26 @@ Vue.component('product-review', {
     },
     methods: {
         onSubmit() {
-            if(this.name && this.review && this.rating) {
+            this.errors = [];
+            if (!this.name) this.errors.push("Name required.");
+            if (!this.review) this.errors.push("Review required.");
+            if (!this.rating) this.errors.push("Rating required.");
+            if (!this.recommend) this.errors.push("Recommendation required.");
+
+            if (this.errors.length === 0) {
                 let productReview = {
                     name: this.name,
                     review: this.review,
-                    rating: this.rating
+                    rating: this.rating,
+                    recommend: this.recommend
                 }
-                this.$emit('review-submitted', productReview)
-                this.name = null
-                this.review = null
-                this.rating = null
-            } else {
-                if(!this.name) this.errors.push("Name required.")
-                if(!this.review) this.errors.push("Review required.")
-                if(!this.rating) this.errors.push("Rating required.")
+                this.$emit('review-submitted', productReview);
+                this.name = null;
+                this.review = null;
+                this.rating = null;
+                this.recommend = null;
             }
         }
-
     }
 });
 
