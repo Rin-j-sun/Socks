@@ -1,41 +1,35 @@
 Vue.component('product-review', {
     template: `
-      <form class="review-form" @submit.prevent="onSubmit">
-      <p v-if="errors.length">
-      <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in errors">{{ error }}</li>
-      </ul>
-      </p>
-
-      <p>
-      <label for="name">Name:</label>
+       <form class="review-form" @submit.prevent="onSubmit">
+    <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </p>
+    <p>
+        <label for="name">Name:</label>
         <input id="name" v-model="name" placeholder="name">
-      </p>
-
-      <p>
+    </p>
+    <p>
         <label for="review">Review:</label>
         <textarea id="review" v-model="review"></textarea>
-      </p>
-
-      <p>
+    </p>
+    <p>
         <label for="rating">Rating:</label>
         <select id="rating" v-model.number="rating">
-          <option>5</option>
-          <option>4</option>
-          <option>3</option>
-          <option>2</option>
-          <option>1</option>
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
         </select>
-      </p>
-
-      <p>
+    </p>
+    <p>
         <input type="submit" value="Submit">
-      </p>
-
-      </form>
-
-    `,
+    </p>
+</form>
+       `,
     data() {
         return {
             name: null,
@@ -44,8 +38,7 @@ Vue.component('product-review', {
             errors: []
         }
     },
-
-    methods:{
+    methods: {
         onSubmit() {
             if(this.name && this.review && this.rating) {
                 let productReview = {
@@ -65,15 +58,17 @@ Vue.component('product-review', {
         }
 
     }
-
-
-})
-
+});
 
 Vue.component('product', {
     props: {
         premium: {
             type: Boolean,
+            required: true
+        },
+
+        cart: {
+            type: Array,
             required: true
         }
     },
@@ -81,9 +76,8 @@ Vue.component('product', {
    <div class="product">
     <div class="product-image">
            <img :src="image" :alt="altText"/>
-    </div>
+       </div>
 
-    
        <div class="product-info">
            <h1>{{ title }}</h1>
            <p v-if="inStock">In stock</p>
@@ -99,7 +93,7 @@ Vue.component('product', {
                    :style="{ backgroundColor:variant.variantColor }"
                    @mouseover="updateProduct(index)"
            ></div>
-          
+
            <button
                    v-on:click="addToCart"
                    :disabled="!inStock"
@@ -110,8 +104,9 @@ Vue.component('product', {
 
          <h2>Reviews</h2>
          <p v-if="!reviews.length">There are no reviews yet.</p>
-         <product-review @review-submitted="addReview"></product-review>         
-         <div>           
+         
+         <product-review @review-submitted="addReview"></product-review>
+         <div>
            <ul>
              <li v-for="review in reviews">
                <p>{{ review.name }}</p>
@@ -120,9 +115,7 @@ Vue.component('product', {
              </li>
            </ul>
          </div>
-
-
-
+         
        </div>
    </div>
  `,
@@ -147,20 +140,21 @@ Vue.component('product', {
                     variantQuantity: 0
                 }
             ],
-            reviews: [],
+            reviews: []
         }
     },
     methods: {
         addToCart() {
             this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
+
         updateProduct(index) {
             this.selectedVariant = index;
             console.log(index);
         },
 
         addReview(productReview) {
-            this.reviews.push(productReview)
+            this.reviews.push(productReview);
         }
 
     },
@@ -183,15 +177,23 @@ Vue.component('product', {
         }
     }
 })
+
+
 let app = new Vue({
     el: '#app',
     data: {
         premium: true,
         cart: []
     },
+
     methods: {
         updateCart(id) {
             this.cart.push(id);
-        }
+        },
+
     }
+
+
 })
+
+
