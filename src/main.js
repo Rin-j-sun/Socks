@@ -2,41 +2,49 @@ let app = new Vue({
     el: '#app',
     data: {
         product: "Socks",
-        image: "./src/assets/vmSocks-green-onWhite.jpg",
+        brand: "Abibas",
+        selectedVariant: 0,
+        image() {
+            return this.variants[this.selectedVariant].variantImage;
+        },
         altText: "A pair of socks",
-        inStock: false,
+        inStock(){
+            return this.variants[this.selectedVariant].variantQuantity
+        },
         details: ['80% Хлопка', '20% Полиэстера', 'Унисекс'],
         variants: [
             {
                 variantId: 2234,
                 variantColor: 'green',
                 variantImage: "./src/assets/vmSocks-green-onWhite.jpg", // путь к фотке
+                variantQuantity: 10
             },
             {
                 variantId: 2235,
                 variantColor: 'blue',
                 variantImage: "./src/assets/vmSocks-blue-onWhite.jpg",
+                variantQuantity: 0
             }
         ],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-        cart: 0,
+        cart: 0
     },
-
     methods: {
         addToCart() {
             this.cart += 1
         },
-        delitToCart() {
-            if (this.cart > 0) {
-                this.cart -= 1
-            }
-        },
-        updateProduct(variantImage) {
-            this.image = variantImage
+        updateProduct(index) {
+            this.selectedVariant = index;
+            console.log(index);
         }
+
+
     },
 
+    computed: {
+        title() {
+            return this.brand + ' ' + this.product;
+        }
+    }
+
 })
-
-
-
