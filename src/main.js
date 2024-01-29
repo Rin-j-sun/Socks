@@ -1,6 +1,36 @@
-import './assets/main.css'
+let app = new Vue({
+    el: '#app',
+    data: {
+        product: "Socks",
+        altText: "A pair of socks",
+        inStock: true,
+        details: ['80% cotton', '20% polyester', 'Gender-neutral'],
+        variants: [
+            {
+                variantId: 2234,
+                variantColor: 'green',
+                variantImage: "./src/assets/vmSocks-green-onWhite.jpg", // путь к фотке
+            },
+            {
+                variantId: 2235,
+                variantColor: 'blue',
+                variantImage: "./src/assets/vmSocks-blue-onWhite.jpg",
+            }
+        ],
+        cart: 0,
+        methods: {
+            addToCart() {
+                this.cart += 1
+            }
+        },
 
-import { createApp } from 'vue'
-import App from './App.vue'
+        updateProduct(variantImage) {
+            this.image = variantImage
+        }
 
-createApp(App).mount('#app')
+
+    }
+})
+
+
+
