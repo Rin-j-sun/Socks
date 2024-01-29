@@ -4,6 +4,7 @@ let app = new Vue({
         product: "Socks",
         brand: "Abibas",
         selectedVariant: 0,
+        onSale: true,
         altText: "A pair of socks",
         details: ['80% Хлопка', '20% Полиэстера', 'Унисекс'],
         variants: [
@@ -48,6 +49,12 @@ let app = new Vue({
         inStock(){
             return this.variants[this.selectedVariant].variantQuantity
         },
+
+        sale(){
+            if(this.onSale === true) {
+                return this.brand + ' ' + this.product + ' on sale !';
+            }
+        }
     },
 
 
