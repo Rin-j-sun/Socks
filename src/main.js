@@ -4,13 +4,7 @@ let app = new Vue({
         product: "Socks",
         brand: "Abibas",
         selectedVariant: 0,
-        image() {
-            return this.variants[this.selectedVariant].variantImage;
-        },
         altText: "A pair of socks",
-        inStock(){
-            return this.variants[this.selectedVariant].variantQuantity
-        },
         details: ['80% Хлопка', '20% Полиэстера', 'Унисекс'],
         variants: [
             {
@@ -29,6 +23,7 @@ let app = new Vue({
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         cart: 0
     },
+
     methods: {
         addToCart() {
             this.cart += 1
@@ -44,7 +39,16 @@ let app = new Vue({
     computed: {
         title() {
             return this.brand + ' ' + this.product;
-        }
-    }
+        },
+
+        image() {
+            return this.variants[this.selectedVariant].variantImage;
+        },
+
+        inStock(){
+            return this.variants[this.selectedVariant].variantQuantity
+        },
+    },
+
 
 })
