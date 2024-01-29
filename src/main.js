@@ -9,21 +9,19 @@ let app = new Vue({
         variants: [
             {
                 variantId: 2234,
-                variantColor: 'Зелёные',
+                variantColor: 'green',
                 variantImage: "./src/assets/vmSocks-green-onWhite.jpg", // путь к фотке
             },
             {
                 variantId: 2235,
-                variantColor: 'Синие',
+                variantColor: 'blue',
                 variantImage: "./src/assets/vmSocks-blue-onWhite.jpg",
             }
         ],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         cart: 0,
-
-
-
     },
+
     methods: {
         addToCart() {
             this.cart += 1
