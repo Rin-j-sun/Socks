@@ -3,6 +3,11 @@ Vue.component('product', {
         premium: {
             type: Boolean,
             required: true
+        },
+
+        cart: {
+            type: Array,
+            required: true
         }
     },
     template: `
@@ -34,6 +39,8 @@ Vue.component('product', {
            >
                Add to cart
            </button>
+
+         <button v-on:click="delitFromCart" class="delitFromCart">Delit from cart</button>
        
        </div>
    </div>
@@ -64,6 +71,13 @@ Vue.component('product', {
     methods: {
         addToCart() {
             this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
+        },
+
+        delitFromCart() {
+            if (this.cart.length > 0) {
+                this.$emit('delit-from-cart', this.cart[this.cart.length - 1]);
+
+            }
         },
 
         updateProduct(index) {
@@ -102,6 +116,13 @@ let app = new Vue({
     methods: {
         updateCart(id) {
             this.cart.push(id);
+        },
+        // Метод для удаления товара из корзины
+        delitFromCart(id) {
+            let index = this.cart.indexOf(id);
+            if (index !== -1) {
+                this.cart.splice(index, 1);
+            }
         }
     }
 
