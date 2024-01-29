@@ -10,16 +10,15 @@ let app = new Vue({
             {
                 variantId: 2234,
                 variantColor: 'green',
-                sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
                 variantImage: "./src/assets/vmSocks-green-onWhite.jpg", // путь к фотке
             },
             {
                 variantId: 2235,
                 variantColor: 'blue',
-                sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
                 variantImage: "./src/assets/vmSocks-blue-onWhite.jpg",
             }
         ],
+        sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         cart: 0,
 
 
