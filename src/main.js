@@ -5,16 +5,16 @@ let app = new Vue({
         image: "./src/assets/vmSocks-green-onWhite.jpg",
         altText: "A pair of socks",
         inStock: true,
-        details: ['80% cotton', '20% polyester', 'Gender-neutral'],
+        details: ['80% Хлопка', '20% Полиэстера', 'Унисекс'],
         variants: [
             {
                 variantId: 2234,
-                variantColor: 'green',
+                variantColor: 'Зелёные',
                 variantImage: "./src/assets/vmSocks-green-onWhite.jpg", // путь к фотке
             },
             {
                 variantId: 2235,
-                variantColor: 'blue',
+                variantColor: 'Синие',
                 variantImage: "./src/assets/vmSocks-blue-onWhite.jpg",
             }
         ],
@@ -27,6 +27,11 @@ let app = new Vue({
     methods: {
         addToCart() {
             this.cart += 1
+        },
+        delitToCart() {
+            if (this.cart > 0) {
+                this.cart -= 1
+            }
         },
         updateProduct(variantImage) {
             this.image = variantImage
