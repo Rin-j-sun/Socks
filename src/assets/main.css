@@ -90,6 +90,11 @@ button {
 /*неактивная ссылка*/
 .disabledLink {
   background-color: #d8d8d8;
+  color: white;
+}
+/*неактивная ссылка*/
+.disabledLink .size:hover {
+  color: white;
 }
 
 .review-form {

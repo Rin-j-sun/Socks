@@ -156,7 +156,7 @@ Vue.component('product', {
 }
     },
     template: `
-   <div class="product">
+      <div class="product" xmlns="http://www.w3.org/1999/html">
     <div class="product-image">
            <img :src="image" :alt="altText"/>
        </div>
@@ -173,29 +173,36 @@ Vue.component('product', {
                    :style="{ backgroundColor:variant.variantColor }"
                    @click="updateProduct(index)"
            ></div>
-         
-        <!--Размеры-->
-         <p style="margin-top: 30px">Размеры :</p>
-         <div class="sizes_block">
-         <div class="sizes" v-for="size in sizes">
-           <button  v-on:click="addToCart"
-                    :disabled="!inStock" 
-                    :class="{disabledLink: !inStock }"><a class="size">{{ size }}</a></button>
-         </div></div>
+
+         <form class="sizes-form" @submit.prevent="addToCart"> <!--  обёртка формы-->
+         <!--Варианты размеров через список-->
+         <p>
+           <label for="sizes">Размеры:</label>
+           <select id="sizes" :disabled="!inStock" v-model.lazy="sizes" required="true">
+             <option>S</option>
+             <option>M</option>
+             <option>L</option>
+             <option>XL</option>
+             <option>XXL</option>
+             <option>XXXL</option>
+           </select>
+         </p>
           
          <div style="margin-top: 50px">
            <button
                    v-on:click="addToCart"
                    :disabled="!inStock"
                    :class="{ disabledButton: !inStock }"
+                   
            >
                Добавить в корзину
            </button>
-
+           
          <button v-on:click="delitFromCart" class="delitFromCart">Удалить из корзины</button>
          </div>
          
        </div>
+     </form>
 
     <product-tabs :reviews="reviews" :premium="premium" :details="details"></product-tabs>
    
@@ -203,6 +210,8 @@ Vue.component('product', {
  `,
     data() {
         return {
+            sizes: null,
+            errors: [],
             product: "Носки",
             brand: 'Абибас',
             selectedVariant: 0,
@@ -220,16 +229,21 @@ Vue.component('product', {
                     variantColor: 'blue',
                     variantImage: "./src/assets/vmSocks-blue-onWhite.jpg",
                     variantQuantity: 0
+
                 }
             ],
             sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
         }
     },
     methods: {
-        addToCart() {
-            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
+            addToCart() {
+                //if ()//{butt}
+                // else
+                this.$emit('add-to-cart', this.variants[this.selectedVariant])
+
             // id color size variants
         },
+
 
         delitFromCart() {
             if (this.cart.length > 0) {
@@ -306,7 +320,7 @@ let app = new Vue({
     methods: {
         // Метод для добавления товара в корзину
         updateCart(id) {
-            this.cart.push(id);
+                this.cart.push(id);
         },
 
     // Метод для удаления товара из корзины
