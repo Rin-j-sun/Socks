@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+header{
+  height: 40px;
+  background: linear-gradient(to right, lightseagreen, greenyellow);
+  margin-bottom: 20px;
+}
+
 .text{
   text-decoration: line-through
 } /*зачёркивание текста*/

@@ -12,16 +12,14 @@
 </head>
 <body>
 
+<header></header>
+
 <div id="app">
     <div class="cart">
         <p>Cart({{ cart.length }})</p>
     </div>
-    <product :premium="premium" :cart="cart"  :reviews="reviews" @add-to-cart="updateCart" @remove-from-cart="removeFromCart "></product>
+    <product :premium="premium" :cart="cart"  :reviews="reviews" @add-to-cart="updateCart" @delit-from-cart="delitFromCart"></product>
 </div>
-
-<!-- Отзывы -->
-<product-tabs :reviews="reviews" :premium="premium" :details="details"></product-tabs>
-
 
 </body>
 </html>
