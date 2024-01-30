@@ -3,11 +3,30 @@ body {
   color:#282828;
   margin: 0;
 }
-
+/*Зелёная линия*/
 header{
   height: 40px;
   background: linear-gradient(to right, lightseagreen, greenyellow);
   margin-bottom: 20px;
+}
+
+/*Стили размеров*/
+/*стильконтейнера*/
+.sizes_block{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  width: 200px;
+  background-color: cornflowerblue;
+}
+.sizes{
+
+}
+/*стиль ссылки*/
+.size:hover{
+ color: white;
 }
 
 .text{
@@ -67,6 +86,10 @@ button {
 }
 
 .disabledButton {
+  background-color: #d8d8d8;
+}
+/*неактивная ссылка*/
+.disabledLink {
   background-color: #d8d8d8;
 }
 

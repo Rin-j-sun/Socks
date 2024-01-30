@@ -171,9 +171,17 @@ Vue.component('product', {
                    v-for="(variant, index) in variants"
                    :key="variant.variantId"
                    :style="{ backgroundColor:variant.variantColor }"
-                   @mouseover="updateProduct(index)"
+                   @click="updateProduct(index)"
            ></div>
+         
+        <!--Размеры-->
+         <p style="margin-top: 30px">Размеры :</p>
+         <div class="sizes_block">
+         <div class="sizes" v-for="size in sizes">
+           <a :disabled="!inStock" class="{disabledLink: !inStock }">{{ size }}</a>
+         </div></div>
           
+         <div style="margin-top: 50px">
            <button
                    v-on:click="addToCart"
                    :disabled="!inStock"
@@ -183,6 +191,7 @@ Vue.component('product', {
            </button>
 
          <button v-on:click="delitFromCart" class="delitFromCart">Удалить из корзины</button>
+         </div>
          
        </div>
 
@@ -217,6 +226,7 @@ Vue.component('product', {
     methods: {
         addToCart() {
             this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
+            // id color size variants
         },
 
         delitFromCart() {
@@ -267,7 +277,7 @@ Vue.component('shipping-tab', {  // Информация о доставке
     }
 });
 
-Vue.component('details-tab', {   // Информаия о товаре
+Vue.component('details-tab', {   // Информация о товаре
     template: `
     <div>
       <p>Информация о товаре :</p>
@@ -289,7 +299,7 @@ let app = new Vue({
     data: {
         premium: true,
         cart: [],
-        reviews: []
+        reviews: [],
     },
     methods: {
         // Метод для добавления товара в корзину

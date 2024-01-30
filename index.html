@@ -18,8 +18,10 @@
     <div class="cart">
         <p>Cart({{ cart.length }})</p>
     </div>
+
     <product :premium="premium" :cart="cart"  :reviews="reviews" @add-to-cart="updateCart" @delit-from-cart="delitFromCart"></product>
 </div>
+
 
 </body>
 </html>
