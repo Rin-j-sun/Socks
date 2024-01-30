@@ -19,14 +19,13 @@ header{
   align-items: center;
   height: 30px;
   width: 200px;
-  background-color: cornflowerblue;
 }
 .sizes{
 
 }
 /*стиль ссылки*/
 .size:hover{
- color: white;
+ color: black;
 }
 
 .text{

@@ -178,7 +178,9 @@ Vue.component('product', {
          <p style="margin-top: 30px">Размеры :</p>
          <div class="sizes_block">
          <div class="sizes" v-for="size in sizes">
-           <a :disabled="!inStock" class="{disabledLink: !inStock }">{{ size }}</a>
+           <button  v-on:click="addToCart"
+                    :disabled="!inStock" 
+                    :class="{disabledLink: !inStock }"><a class="size">{{ size }}</a></button>
          </div></div>
           
          <div style="margin-top: 50px">
